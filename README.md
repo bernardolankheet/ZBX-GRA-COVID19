@@ -51,3 +51,5 @@ Ao importar o Template para o Garfana, selecione seu Data Source.
 
 Obs: Caso em paises não apareça a lista, verifique se as aplicações e itens foram gerados no Zabbix.
 
+![Image description](screencapture-localhost-3000-d-EL1woQuWz-01-covid19-world-2020-03-25-16_10_17.png)
+
