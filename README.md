@@ -1,6 +1,10 @@
 # ZBX-GRA-COVID19
 Template_Module_HTTP_LLD_W_Corona and Grafana Dashboard
 
+Zabbix Share: https://share.zabbix.com/zabbix-tools-and-utilities/template-module-http-lld-w-covid19
+
+Grafana:https://grafana.com/grafana/dashboards/11987
+
 EN-US
 
 Homologated:
