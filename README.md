@@ -23,6 +23,8 @@ Imports the Dashboard in Grafana
 
 When importing the Template into Garfana, select your Data Source.
 
+Note: If the list does not appear in countries, check if the applications and items were generated in Zabbix.
+
 
 PR-BR
 
@@ -47,4 +49,5 @@ Importe a Dashboard no Grafana
 
 Ao importar o Template para o Garfana, selecione seu Data Source.
 
+Obs: Caso em paises não apareça a lista, verifique se as aplicações e itens foram gerados no Zabbix.
 
