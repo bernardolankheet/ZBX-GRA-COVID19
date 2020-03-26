@@ -29,8 +29,22 @@ When importing the Template into Garfana, select your Data Source.
 
 Note: If the list does not appear in countries, check if the applications and items were generated in Zabbix.
 
+Macros:
 
-PR-BR
+- {$HISTORYSP}: History storage period
+
+- {$INTERVALHTTP}: Update interval
+
+- {$INTERVALLLDHTTP}: Update interval HTTP Item LLD
+
+- {$LOSTPERIOD}:
+
+- {$TRENDSP}: Trend storage period
+
+- {$UPINTERVALLLD}: Update interval Item LLD
+
+
+PT-BR
 
 Homologado: 
 
@@ -55,5 +69,20 @@ Ao importar o Template para o Garfana, selecione seu Data Source.
 
 Obs: Caso em paises não apareça a lista, verifique se as aplicações e itens foram gerados no Zabbix.
 
+Macros:
+
+- {$HISTORYSP}: History storage period
+
+- {$INTERVALHTTP}: Update interval
+
+- {$INTERVALLLDHTTP}: Update interval HTTP Item LLD
+
+- {$LOSTPERIOD}:
+
+- {$TRENDSP}: Trend storage period
+
+- {$UPINTERVALLLD}: Update interval Item LLD
+
 ![Image description](screencapture-localhost-3000-d-EL1woQuWz-01-covid19-world-2020-03-25-16_10_17.png)
+
 
