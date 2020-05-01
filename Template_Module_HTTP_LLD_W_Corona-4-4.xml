@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.4</version>
-    <date>2020-03-26T11:07:33Z</date>
+    <date>2020-05-01T20:20:21Z</date>
     <groups>
         <group>
             <name>CORONAVIRUS</name>
@@ -9,8 +9,8 @@
     </groups>
     <templates>
         <template>
-            <template>Template_Module_HTTP_LLD_W_Corona</template>
-            <name>Template_Module_HTTP_LLD_W_Corona</name>
+            <template>Template_Module_HTTP_LLD_W_Corona_44</template>
+            <name>Template_Module_HTTP_LLD_W_Corona_44</name>
             <groups>
                 <group>
                     <name>CORONAVIRUS</name>
@@ -37,7 +37,7 @@
                         </application>
                     </applications>
                     <timeout>10s</timeout>
-                    <url>https://corona.lmao.ninja/all</url>
+                    <url>https://corona.lmao.ninja/v2/all</url>
                 </item>
                 <item>
                     <name>Total All Cases</name>
@@ -112,6 +112,7 @@
                     <delay>0</delay>
                     <history>{$HISTORYSP}</history>
                     <trends>{$TRENDSP}</trends>
+                    <units>unixtime</units>
                     <applications>
                         <application>
                             <name>Total Cases</name>
@@ -155,7 +156,7 @@
                                     <params>$.active</params>
                                 </step>
                             </preprocessing>
-                            <url>https://corona.lmao.ninja/countries/{#COUNTRY}</url>
+                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
                         </item_prototype>
                         <item_prototype>
                             <name>&quot;{#COUNTRY} - {#ISO3}&quot; - Cases</name>
@@ -174,12 +175,8 @@
                                     <type>JSONPATH</type>
                                     <params>$.cases</params>
                                 </step>
-                                <step>
-                                    <type>DISCARD_UNCHANGED</type>
-                                    <params/>
-                                </step>
                             </preprocessing>
-                            <url>https://corona.lmao.ninja/countries/{#COUNTRY}</url>
+                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
                         </item_prototype>
                         <item_prototype>
                             <name>&quot;{#COUNTRY} - {#ISO3}&quot; - CasesPerOneMillion</name>
@@ -199,7 +196,7 @@
                                     <params>$.casesPerOneMillion</params>
                                 </step>
                             </preprocessing>
-                            <url>https://corona.lmao.ninja/countries/{#COUNTRY}</url>
+                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
                         </item_prototype>
                         <item_prototype>
                             <name>&quot;{#COUNTRY} - {#ISO3}&quot; - Critical</name>
@@ -219,7 +216,7 @@
                                     <params>$.critical</params>
                                 </step>
                             </preprocessing>
-                            <url>https://corona.lmao.ninja/countries/{#COUNTRY}</url>
+                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
                         </item_prototype>
                         <item_prototype>
                             <name>&quot;{#COUNTRY} - {#ISO3}&quot; - Deaths</name>
@@ -239,7 +236,7 @@
                                     <params>$.deaths</params>
                                 </step>
                             </preprocessing>
-                            <url>https://corona.lmao.ninja/countries/{#COUNTRY}</url>
+                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
                         </item_prototype>
                         <item_prototype>
                             <name>&quot;{#COUNTRY} - {#ISO3}&quot; - DeathsPerOneMillion</name>
@@ -248,7 +245,6 @@
                             <delay>{$UPINTERVALLLD}</delay>
                             <history>{$HISTORYSP}</history>
                             <trends>{$TRENDSP}</trends>
-                            <value_type>FLOAT</value_type>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Cases &quot;{#COUNTRY}&quot;</name>
@@ -258,11 +254,9 @@
                                 <step>
                                     <type>JSONPATH</type>
                                     <params>$.deathsPerOneMillion</params>
-                                    <error_handler>CUSTOM_VALUE</error_handler>
-                                    <error_handler_params>0</error_handler_params>
                                 </step>
                             </preprocessing>
-                            <url>https://corona.lmao.ninja/countries/{#COUNTRY}</url>
+                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
                         </item_prototype>
                         <item_prototype>
                             <name>&quot;{#COUNTRY} - {#ISO3}&quot; - Recovered</name>
@@ -282,7 +276,7 @@
                                     <params>$.recovered</params>
                                 </step>
                             </preprocessing>
-                            <url>https://corona.lmao.ninja/countries/{#COUNTRY}</url>
+                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
                         </item_prototype>
                         <item_prototype>
                             <name>&quot;{#COUNTRY} - {#ISO3}&quot; - TodayCases</name>
@@ -302,7 +296,7 @@
                                     <params>$.todayCases</params>
                                 </step>
                             </preprocessing>
-                            <url>https://corona.lmao.ninja/countries/{#COUNTRY}</url>
+                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
                         </item_prototype>
                         <item_prototype>
                             <name>&quot;{#COUNTRY} - {#ISO3}&quot; - TodayDeaths</name>
@@ -322,11 +316,11 @@
                                     <params>$.todayDeaths</params>
                                 </step>
                             </preprocessing>
-                            <url>https://corona.lmao.ninja/countries/{#COUNTRY}</url>
+                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
                         </item_prototype>
                     </item_prototypes>
                     <timeout>7s</timeout>
-                    <url>https://corona.lmao.ninja/countries</url>
+                    <url>https://corona.lmao.ninja/v2/countries</url>
                     <lld_macro_paths>
                         <lld_macro_path>
                             <lld_macro>{#COUNTRY}</lld_macro>

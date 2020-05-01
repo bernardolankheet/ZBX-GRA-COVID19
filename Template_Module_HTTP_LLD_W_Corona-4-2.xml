@@ -9,8 +9,8 @@
     </groups>
     <templates>
         <template>
-            <template>Template_Module_HTTP_LLD_W_Corona</template>
-            <name>Template_Module_HTTP_LLD_W_Corona</name>
+            <template>Template_Module_HTTP_LLD_W_Corona42</template>
+            <name>Template_Module_HTTP_LLD_W_Corona42</name>
             <description/>
             <groups>
                 <group>
@@ -63,7 +63,7 @@
                     <preprocessing/>
                     <jmx_endpoint/>
                     <timeout>10s</timeout>
-                    <url>https://corona.lmao.ninja/all</url>
+                    <url>https://corona.lmao.ninja/v2/all</url>
                     <query_fields/>
                     <posts/>
                     <status_codes>200</status_codes>
@@ -298,7 +298,7 @@
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units/>
+                    <units>unixtime</units>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
                     <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -431,7 +431,7 @@
                             </preprocessing>
                             <jmx_endpoint/>
                             <timeout>3s</timeout>
-                            <url>https://corona.lmao.ninja/countries/{#COUNTRY}</url>
+                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
                             <query_fields/>
                             <posts/>
                             <status_codes>200</status_codes>
@@ -498,7 +498,7 @@
                             </preprocessing>
                             <jmx_endpoint/>
                             <timeout>3s</timeout>
-                            <url>https://corona.lmao.ninja/countries/{#COUNTRY}</url>
+                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
                             <query_fields/>
                             <posts/>
                             <status_codes>200</status_codes>
@@ -565,7 +565,7 @@
                             </preprocessing>
                             <jmx_endpoint/>
                             <timeout>3s</timeout>
-                            <url>https://corona.lmao.ninja/countries/{#COUNTRY}</url>
+                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
                             <query_fields/>
                             <posts/>
                             <status_codes>200</status_codes>
@@ -632,7 +632,7 @@
                             </preprocessing>
                             <jmx_endpoint/>
                             <timeout>3s</timeout>
-                            <url>https://corona.lmao.ninja/countries/{#COUNTRY}</url>
+                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
                             <query_fields/>
                             <posts/>
                             <status_codes>200</status_codes>
@@ -699,7 +699,7 @@
                             </preprocessing>
                             <jmx_endpoint/>
                             <timeout>3s</timeout>
-                            <url>https://corona.lmao.ninja/countries/{#COUNTRY}</url>
+                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
                             <query_fields/>
                             <posts/>
                             <status_codes>200</status_codes>
@@ -766,7 +766,7 @@
                             </preprocessing>
                             <jmx_endpoint/>
                             <timeout>3s</timeout>
-                            <url>https://corona.lmao.ninja/countries/{#COUNTRY}</url>
+                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
                             <query_fields/>
                             <posts/>
                             <status_codes>200</status_codes>
@@ -833,7 +833,7 @@
                             </preprocessing>
                             <jmx_endpoint/>
                             <timeout>3s</timeout>
-                            <url>https://corona.lmao.ninja/countries/{#COUNTRY}</url>
+                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
                             <query_fields/>
                             <posts/>
                             <status_codes>200</status_codes>
@@ -900,7 +900,7 @@
                             </preprocessing>
                             <jmx_endpoint/>
                             <timeout>3s</timeout>
-                            <url>https://corona.lmao.ninja/countries/{#COUNTRY}</url>
+                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
                             <query_fields/>
                             <posts/>
                             <status_codes>200</status_codes>
@@ -967,7 +967,7 @@
                             </preprocessing>
                             <jmx_endpoint/>
                             <timeout>3s</timeout>
-                            <url>https://corona.lmao.ninja/countries/{#COUNTRY}</url>
+                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
                             <query_fields/>
                             <posts/>
                             <status_codes>200</status_codes>
@@ -997,7 +997,7 @@
                     <host_prototypes/>
                     <jmx_endpoint/>
                     <timeout>7s</timeout>
-                    <url>https://corona.lmao.ninja/countries</url>
+                    <url>https://corona.lmao.ninja/v2/countries</url>
                     <query_fields/>
                     <posts/>
                     <status_codes>200</status_codes>
