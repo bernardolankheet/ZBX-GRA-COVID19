@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.4</version>
-    <date>2020-05-01T20:20:21Z</date>
+    <date>2020-05-14T23:16:16Z</date>
     <groups>
         <group>
-            <name>CORONAVIRUS</name>
+            <name>COVID-19</name>
         </group>
     </groups>
     <templates>
@@ -13,15 +13,35 @@
             <name>Template_Module_HTTP_LLD_W_Corona_44</name>
             <groups>
                 <group>
-                    <name>CORONAVIRUS</name>
+                    <name>COVID-19</name>
                 </group>
             </groups>
             <applications>
+                <application>
+                    <name>Raw</name>
+                </application>
                 <application>
                     <name>Total Cases</name>
                 </application>
             </applications>
             <items>
+                <item>
+                    <name>CountriesRaw</name>
+                    <type>HTTP_AGENT</type>
+                    <key>countries.rawdata</key>
+                    <delay>{$INTERVALHTTP}</delay>
+                    <history>{$HISTORYSP}</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <applications>
+                        <application>
+                            <name>Raw</name>
+                        </application>
+                    </applications>
+                    <timeout>7s</timeout>
+                    <url>https://corona.lmao.ninja/v2/countries</url>
+                    <http_proxy>{$HTTP_PROXY}</http_proxy>
+                </item>
                 <item>
                     <name>HTTP Consult Total</name>
                     <type>HTTP_AGENT</type>
@@ -38,6 +58,24 @@
                     </applications>
                     <timeout>10s</timeout>
                     <url>https://corona.lmao.ninja/v2/all</url>
+                    <http_proxy>{$HTTP_PROXY}</http_proxy>
+                </item>
+                <item>
+                    <name>StatesRaw</name>
+                    <type>HTTP_AGENT</type>
+                    <key>states.rawdata</key>
+                    <delay>{$INTERVALHTTP}</delay>
+                    <history>{$HISTORYSP}</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <applications>
+                        <application>
+                            <name>Raw</name>
+                        </application>
+                    </applications>
+                    <timeout>7s</timeout>
+                    <url>https://corona.lmao.ninja/v2/states</url>
+                    <http_proxy>{$HTTP_PROXY}</http_proxy>
                 </item>
                 <item>
                     <name>Total All Cases</name>
@@ -132,17 +170,17 @@
             <discovery_rules>
                 <discovery_rule>
                     <name>Discovery Countries</name>
-                    <type>HTTP_AGENT</type>
+                    <type>DEPENDENT</type>
                     <key>discovery.countries</key>
-                    <delay>{$INTERVALLLDHTTP}</delay>
+                    <delay>0</delay>
                     <lifetime>{$LOSTPERIOD}</lifetime>
                     <description>Discovery Data Raw All</description>
                     <item_prototypes>
                         <item_prototype>
                             <name>&quot;{#COUNTRY} - {#ISO3}&quot; - ActiveCases</name>
-                            <type>HTTP_AGENT</type>
+                            <type>DEPENDENT</type>
                             <key>active.country[{#COUNTRY}]</key>
-                            <delay>{$UPINTERVALLLD}</delay>
+                            <delay>0</delay>
                             <history>{$HISTORYSP}</history>
                             <trends>{$TRENDSP}</trends>
                             <application_prototypes>
@@ -156,13 +194,15 @@
                                     <params>$.active</params>
                                 </step>
                             </preprocessing>
-                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
+                            <master_item>
+                                <key>raw.country[{#COUNTRY}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>&quot;{#COUNTRY} - {#ISO3}&quot; - Cases</name>
-                            <type>HTTP_AGENT</type>
+                            <type>DEPENDENT</type>
                             <key>cases.country[{#COUNTRY}]</key>
-                            <delay>{$UPINTERVALLLD}</delay>
+                            <delay>0</delay>
                             <history>{$HISTORYSP}</history>
                             <trends>{$TRENDSP}</trends>
                             <application_prototypes>
@@ -176,13 +216,15 @@
                                     <params>$.cases</params>
                                 </step>
                             </preprocessing>
-                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
+                            <master_item>
+                                <key>raw.country[{#COUNTRY}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>&quot;{#COUNTRY} - {#ISO3}&quot; - CasesPerOneMillion</name>
-                            <type>HTTP_AGENT</type>
+                            <type>DEPENDENT</type>
                             <key>casesPerOneMillion.country[{#COUNTRY}]</key>
-                            <delay>{$UPINTERVALLLD}</delay>
+                            <delay>0</delay>
                             <history>{$HISTORYSP}</history>
                             <trends>{$TRENDSP}</trends>
                             <application_prototypes>
@@ -196,13 +238,15 @@
                                     <params>$.casesPerOneMillion</params>
                                 </step>
                             </preprocessing>
-                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
+                            <master_item>
+                                <key>raw.country[{#COUNTRY}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>&quot;{#COUNTRY} - {#ISO3}&quot; - Critical</name>
-                            <type>HTTP_AGENT</type>
+                            <type>DEPENDENT</type>
                             <key>critical.country[{#COUNTRY}]</key>
-                            <delay>{$UPINTERVALLLD}</delay>
+                            <delay>0</delay>
                             <history>{$HISTORYSP}</history>
                             <trends>{$TRENDSP}</trends>
                             <application_prototypes>
@@ -216,13 +260,15 @@
                                     <params>$.critical</params>
                                 </step>
                             </preprocessing>
-                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
+                            <master_item>
+                                <key>raw.country[{#COUNTRY}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>&quot;{#COUNTRY} - {#ISO3}&quot; - Deaths</name>
-                            <type>HTTP_AGENT</type>
+                            <type>DEPENDENT</type>
                             <key>deaths.country[{#COUNTRY}]</key>
-                            <delay>{$UPINTERVALLLD}</delay>
+                            <delay>0</delay>
                             <history>{$HISTORYSP}</history>
                             <trends>{$TRENDSP}</trends>
                             <application_prototypes>
@@ -236,13 +282,15 @@
                                     <params>$.deaths</params>
                                 </step>
                             </preprocessing>
-                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
+                            <master_item>
+                                <key>raw.country[{#COUNTRY}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>&quot;{#COUNTRY} - {#ISO3}&quot; - DeathsPerOneMillion</name>
-                            <type>HTTP_AGENT</type>
+                            <type>DEPENDENT</type>
                             <key>deathsPerOneMillion.country[{#COUNTRY}]</key>
-                            <delay>{$UPINTERVALLLD}</delay>
+                            <delay>0</delay>
                             <history>{$HISTORYSP}</history>
                             <trends>{$TRENDSP}</trends>
                             <application_prototypes>
@@ -256,13 +304,38 @@
                                     <params>$.deathsPerOneMillion</params>
                                 </step>
                             </preprocessing>
-                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
+                            <master_item>
+                                <key>raw.country[{#COUNTRY}]</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>&quot;{#COUNTRY} - {#ISO3}&quot; - Raw</name>
+                            <type>DEPENDENT</type>
+                            <key>raw.country[{#COUNTRY}]</key>
+                            <delay>0</delay>
+                            <history>0</history>
+                            <trends>0</trends>
+                            <value_type>CHAR</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Cases &quot;{#COUNTRY}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$.[?(@.country== &quot;{#COUNTRY}&quot;)].first()</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>countries.rawdata</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>&quot;{#COUNTRY} - {#ISO3}&quot; - Recovered</name>
-                            <type>HTTP_AGENT</type>
+                            <type>DEPENDENT</type>
                             <key>recovered.country[{#COUNTRY}]</key>
-                            <delay>{$UPINTERVALLLD}</delay>
+                            <delay>0</delay>
                             <history>{$HISTORYSP}</history>
                             <trends>{$TRENDSP}</trends>
                             <application_prototypes>
@@ -276,13 +349,15 @@
                                     <params>$.recovered</params>
                                 </step>
                             </preprocessing>
-                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
+                            <master_item>
+                                <key>raw.country[{#COUNTRY}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>&quot;{#COUNTRY} - {#ISO3}&quot; - TodayCases</name>
-                            <type>HTTP_AGENT</type>
+                            <type>DEPENDENT</type>
                             <key>today.cases.country[{#COUNTRY}]</key>
-                            <delay>{$UPINTERVALLLD}</delay>
+                            <delay>0</delay>
                             <history>{$HISTORYSP}</history>
                             <trends>{$TRENDSP}</trends>
                             <application_prototypes>
@@ -296,13 +371,15 @@
                                     <params>$.todayCases</params>
                                 </step>
                             </preprocessing>
-                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
+                            <master_item>
+                                <key>raw.country[{#COUNTRY}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>&quot;{#COUNTRY} - {#ISO3}&quot; - TodayDeaths</name>
-                            <type>HTTP_AGENT</type>
+                            <type>DEPENDENT</type>
                             <key>today.deaths.country[{#COUNTRY}]</key>
-                            <delay>{$UPINTERVALLLD}</delay>
+                            <delay>0</delay>
                             <history>{$HISTORYSP}</history>
                             <trends>{$TRENDSP}</trends>
                             <application_prototypes>
@@ -316,11 +393,14 @@
                                     <params>$.todayDeaths</params>
                                 </step>
                             </preprocessing>
-                            <url>https://corona.lmao.ninja/v2/countries/{#COUNTRY}</url>
+                            <master_item>
+                                <key>raw.country[{#COUNTRY}]</key>
+                            </master_item>
                         </item_prototype>
                     </item_prototypes>
-                    <timeout>7s</timeout>
-                    <url>https://corona.lmao.ninja/v2/countries</url>
+                    <master_item>
+                        <key>countries.rawdata</key>
+                    </master_item>
                     <lld_macro_paths>
                         <lld_macro_path>
                             <lld_macro>{#COUNTRY}</lld_macro>
@@ -332,11 +412,211 @@
                         </lld_macro_path>
                     </lld_macro_paths>
                 </discovery_rule>
+                <discovery_rule>
+                    <name>Discovery States</name>
+                    <type>DEPENDENT</type>
+                    <key>discovery.states</key>
+                    <delay>0</delay>
+                    <lifetime>{$LOSTPERIOD}</lifetime>
+                    <description>Discovery Data Raw All</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>&quot;{#STATE}&quot; - ActiveCases</name>
+                            <type>DEPENDENT</type>
+                            <key>active.state[{#STATE}]</key>
+                            <delay>0</delay>
+                            <history>{$HISTORYSP}</history>
+                            <trends>{$TRENDSP}</trends>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Cases &quot;{#STATE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$.active</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>raw.state[{#STATE}]</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>&quot;{#STATE}&quot; - Cases</name>
+                            <type>DEPENDENT</type>
+                            <key>cases.state[{#STATE}]</key>
+                            <delay>0</delay>
+                            <history>{$HISTORYSP}</history>
+                            <trends>{$TRENDSP}</trends>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Cases &quot;{#STATE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$.cases</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>raw.state[{#STATE}]</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>&quot;{#STATE}&quot; - Deaths</name>
+                            <type>DEPENDENT</type>
+                            <key>deaths.state[{#STATE}]</key>
+                            <delay>0</delay>
+                            <history>{$HISTORYSP}</history>
+                            <trends>{$TRENDSP}</trends>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Cases &quot;{#STATE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$.deaths</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>raw.state[{#STATE}]</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>&quot;{#STATE}&quot; - Raw</name>
+                            <type>DEPENDENT</type>
+                            <key>raw.state[{#STATE}]</key>
+                            <delay>0</delay>
+                            <history>0</history>
+                            <trends>0</trends>
+                            <value_type>CHAR</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Cases &quot;{#STATE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$.[?(@.state == &quot;{#STATE}&quot;)].first()</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>states.rawdata</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>&quot;{#STATE}&quot; - Tests</name>
+                            <type>DEPENDENT</type>
+                            <key>tests.state[{#STATE}]</key>
+                            <delay>0</delay>
+                            <history>{$HISTORYSP}</history>
+                            <trends>{$TRENDSP}</trends>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Cases &quot;{#STATE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$.tests</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>raw.state[{#STATE}]</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>&quot;{#STATE}&quot; - TestsPerOneMillion</name>
+                            <type>DEPENDENT</type>
+                            <key>testsPerOneMillion.state[{#STATE}]</key>
+                            <delay>0</delay>
+                            <history>{$HISTORYSP}</history>
+                            <trends>{$TRENDSP}</trends>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Cases &quot;{#STATE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$.testsPerOneMillion</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>raw.state[{#STATE}]</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>&quot;{#STATE}&quot; - TodayCases</name>
+                            <type>DEPENDENT</type>
+                            <key>today.cases.state[{#STATE}]</key>
+                            <delay>0</delay>
+                            <history>{$HISTORYSP}</history>
+                            <trends>{$TRENDSP}</trends>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Cases &quot;{#STATE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$.todayCases</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>raw.state[{#STATE}]</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>&quot;{#STATE}&quot; - TodayDeaths</name>
+                            <type>DEPENDENT</type>
+                            <key>today.deaths.state[{#STATE}]</key>
+                            <delay>0</delay>
+                            <history>{$HISTORYSP}</history>
+                            <trends>{$TRENDSP}</trends>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Cases &quot;{#STATE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$.todayDeaths</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>raw.state[{#STATE}]</key>
+                            </master_item>
+                        </item_prototype>
+                    </item_prototypes>
+                    <master_item>
+                        <key>states.rawdata</key>
+                    </master_item>
+                    <lld_macro_paths>
+                        <lld_macro_path>
+                            <lld_macro>{#STATE}</lld_macro>
+                            <path>$.state</path>
+                        </lld_macro_path>
+                    </lld_macro_paths>
+                </discovery_rule>
             </discovery_rules>
             <macros>
                 <macro>
                     <macro>{$HISTORYSP}</macro>
-                    <value>90d</value>
+                    <value>7d</value>
+                </macro>
+                <macro>
+                    <macro>{$HTTP_PROXY}</macro>
+                    <value></value>
                 </macro>
                 <macro>
                     <macro>{$INTERVALHTTP}</macro>
@@ -352,7 +632,7 @@
                 </macro>
                 <macro>
                     <macro>{$TRENDSP}</macro>
-                    <value>365d</value>
+                    <value>90d</value>
                 </macro>
                 <macro>
                     <macro>{$UPINTERVALLLD}</macro>
@@ -361,4 +641,26 @@
             </macros>
         </template>
     </templates>
+    <hosts>
+        <host>
+            <host>CORONA-COVID19</host>
+            <name>Stat Tracker</name>
+            <templates>
+                <template>
+                    <name>Template_Module_HTTP_LLD_W_Corona_44</name>
+                </template>
+            </templates>
+            <groups>
+                <group>
+                    <name>COVID-19</name>
+                </group>
+            </groups>
+            <interfaces>
+                <interface>
+                    <interface_ref>if1</interface_ref>
+                </interface>
+            </interfaces>
+            <inventory_mode>DISABLED</inventory_mode>
+        </host>
+    </hosts>
 </zabbix_export>
