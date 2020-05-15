@@ -9,25 +9,25 @@ EN-US
 
 Homologated:
 
-Zabbix 4.2.8, 4.4.4 and 4.4.7
+Zabbix 4.2.8, 4.4.4, 4.4.7, and 4.4.8
 
-Grafana 6.6.2
+Grafana 6.6.2, 6.7.1
 
 Required plugins:
 
 1) grafana-worldmap-panel - https://grafana.com/grafana/plugins/grafana-worldmap-panel
 2) alexanderzobnin-zabbix-app - https://grafana.com/grafana/plugins/alexanderzobnin-zabbix-app
 
-Import Template_Module_HTTP_LLD_W_Corona into Zabbix
+Import Template_Module_HTTP_LLD_W_Corona into Zabbix, including any hosts
 
-Create a host with the name "CORONA-COVID19", you can use the local interface (127.0.0.1: 10050) and the Hostgroup use the name "CORONAVIRUS" and link the template to the host.
-Wait for data collection, or use the function "Check now" in the item and in the LLD to speed up the collection
+Wait for data collection, or use the function "Check now" on the 3 HTTP Agents
 
-Imports the Dashboard in Grafana
+Import the Dashboard in Grafana
 
 When importing the Template into Garfana, select your Data Source.
 
-Note: If the list does not appear in countries, check if the applications and items were generated in Zabbix.
+Note: It may take some time before Grafana starts to display things.
+If the list does not appear in countries, check if the applications and items were generated in Zabbix.
 
 Macros:
 
@@ -37,7 +37,9 @@ Macros:
 
 - {$INTERVALLLDHTTP}: Update interval HTTP Item LLD
 
-- {$LOSTPERIOD}:
+- {$LOSTPERIOD}: Time until the item is removed if there's no data
+
+- {$HTTP_PROXY}: Proxy server to use for the HTTP Agent
 
 - {$TRENDSP}: Trend storage period
 
